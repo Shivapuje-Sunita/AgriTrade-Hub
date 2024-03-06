@@ -1,11 +1,13 @@
 import React from "react";
-import { TodoWrapper } from "./components/TodoWrapper"; // Corrected import statement
+import ProductList from "./agritrade/ProductList";
+const cors = require("cors");
 
 function App() {
   return (
-    <div className="APP">
-      <TodoWrapper />
+    <div className="App">
+      <ProductList />
     </div>
   );
 }
+
 export default App;
