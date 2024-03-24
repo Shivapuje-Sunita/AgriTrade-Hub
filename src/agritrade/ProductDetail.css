@@ -1,0 +1,120 @@
+.popup-details {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:rgb(216, 213, 215);
+    /* More red, creating a slightly orange-yellow */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 10px;
+    z-index: 1000;
+    width: 400px;
+    
+}
+
+
+
+.popup1 img {
+    width: 200px;
+    height: 200px;
+    margin-left: 100px;
+    margin-right: 20px;
+}
+
+.popup-details h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #000;
+}
+
+
+.popup-details p {
+    margin: 0;
+    color: black;
+    margin-top:1px;
+    font-size: 15px;
+
+}
+.popup-details .price{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+.popup-details .info{
+    color: gray;
+    font-size: 15px;
+}
+
+.low-button{
+    background-color:rgb(176, 251, 176);
+    width:180px;
+    padding:5px;
+    color: #000;
+    border: none;
+}
+.high-button{
+    background-color:rgb(246, 207, 144);
+    width: 180px;
+    padding: 5px;
+    border: none;
+    color: #000;
+    
+}
+.popup-details .info1{
+    color: gray;
+    font-size: 15px;
+}
+
+
+.close{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color:black;
+    font-size: 18px;
+}
+
+.close-upward:hover {
+    color: #000;
+    /* Adjust hover color as needed */
+}
+.location1 {
+    position: absolute;
+    top: 260px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    color: blue;
+    font-weight: bold;
+}
+
+.location1 svg {
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.sell-button {
+    background-color:green;
+    color: white;
+    width: 370px;
+    margin-left: 3px;
+    font-size: 13px;
+    
+    padding:8px;
+    
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+    border: none;
+    
+}
+
+.sell-button:hover {
+    background-color: rgb(47, 113, 47);
+}

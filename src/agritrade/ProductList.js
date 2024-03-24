@@ -1,45 +1,70 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import Popup from "./ProductDetail";
 import "./ProductList.css";
-import Header from "./Header";
-
-const corsOptions = {
-  origin: "*",
-  optionsSuccessStatus: 200,
-};
 
 function ProductList() {
   const [products, setProducts] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleImageClick = (product) => {
+    setSelectedProduct(product);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.log(error));
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:9000/products");
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
   }, []);
 
   return (
     <>
-      <div>
-        <Header />
-      </div>
-      <div id="products">
-        {products.map((product, index) => (
-          <div key={index} className="card">
+      <header>
+        <h1>Product List</h1>
+      </header>
+      <div id="products" className={showPopup ? "blur" : ""}>
+        {products.map((product) => (
+          <div key={product._id} className="card">
             <div className="card-image">
-              <img src={product.image} alt={product.title} />
+              <img
+                src={product.image}
+                alt={product.name}
+                onClick={() => handleImageClick(product)}
+              />
+              <div className="location">
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+                <span>Humnabad</span>
+              </div>
             </div>
             <div className="card-info">
-              <h3>{product.title}</h3>
-              <p>Category: {product.category}</p>
+              <h3>{product.name}</h3>
               <p>{product.description}</p>
-              <p className="rating">
-                {product.rating.rate}/5 ({product.rating.count})
-              </p>
-              <p className="price">${product.price}</p>
+              <p className="price">₹ {product.price}kg</p>
             </div>
           </div>
         ))}
       </div>
+      {showPopup && <Popup product={selectedProduct} onClose={closePopup} />}
     </>
   );
 }

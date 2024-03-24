@@ -1,0 +1,72 @@
+/* SellerForm.css */
+.popup1-details {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('https://th.bing.com/th/id/OIP.h24rTI2FMIUWR582smHxpwHaD9?w=930&h=498&rs=1&pid=ImgDetMain');
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 8px;
+    z-index: 1000;
+    width: 400px;
+    height: 570px;
+
+}
+
+
+.popup1-details h4 {
+    color:white;
+    font-size: 30px;
+    margin-bottom: 15px;
+  
+}
+
+.popup1-details label{
+    display: block;
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: black;
+}
+
+.popup1-details input,
+.popup1-details select,
+.popup1-details textarea {
+    width: 100%;
+    
+    padding: 8px;
+    font-size: 12px;
+    
+    margin-bottom: 1px;
+   
+    border: 1px solid #ccc;
+    
+    border-radius: 4px;
+    
+    box-sizing: border-box;
+  
+}
+
+.popup1-details button[type="submit"] {
+background-color: rgb(83, 214, 83);
+    color: white;
+    width: 380px;
+    margin-left: 3px;
+    font-size: 18px;
+    border-radius: 4px;
+
+    padding: 4px;
+
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+    border: none;
+    
+}
+
+
+.popup1-details button[type="submit"]:hover {
+    background-color:rgb(44, 147, 44);
+   
+}
