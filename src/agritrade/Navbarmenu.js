@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FiAlignRight, FiXCircle } from "react-icons/fi";
-import logo from "C:/front_end_projects/my-app/src/agritrade/logo1.png";
+import logo from "C:/Users/shiva/OneDrive/Desktop/clone/agrarian-marketplace-ui-new/src/agritrade/logo1.png";
 import "./App.css";
 
 const navItems = [

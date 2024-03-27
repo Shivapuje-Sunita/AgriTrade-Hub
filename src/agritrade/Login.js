@@ -1,38 +1,66 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Login.css";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
+    setError("");
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (isLogin) {
+        // Login
+        const response = await axios.post(
+          "http://localhost:9000/login",
+          formData
+        );
+        console.log(response.data.message); // Log success message
+      } else {
+        // Sign up
+        const response = await axios.post(
+          "http://localhost:9000/signUp",
+          formData
+        );
+        console.log(response.data.message); // Log success message
+      }
+    } catch (error) {
+      console.error("Error:", error.response.data.message);
+      setError(error.response.data.message);
+    }
   };
 
   return (
-    <div
-      className="wrapper"
-      // style={{
-      //   backgroundImage:
-      //     'url("https://th.bing.com/th/id/OIP.h24rTI2FMIUWR582smHxpwHaD9?w=930&h=498&rs=1&pid=ImgDetMain")',
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      // }}
-    >
+    <div className="wrapper">
       <nav className="nav">
         <div className="nav-button">
           <button
             className={`btn ${isLogin ? "white-btn" : ""}`}
             onClick={toggleForm}
           >
-            {" "}
-            Sign In{" "}
+            Sign In
           </button>{" "}
           <button
             className={`btn ${isLogin ? "" : "white-btn"}`}
             onClick={toggleForm}
           >
-            {" "}
-            Sign Up{" "}
+            Sign Up
           </button>{" "}
         </div>{" "}
       </nav>
@@ -44,61 +72,40 @@ const Login = () => {
           <div className="top">
             <span>
               {" "}
-              Don 't have an account?{" "}
+              Don't have an account?{" "}
               <button className="link-btn" onClick={toggleForm}>
                 Sign Up
               </button>
             </span>{" "}
             <header> Login </header>{" "}
           </div>{" "}
-          <form>
+          <form onSubmit={handleSubmit}>
+            {error && <div className="error-message">{error}</div>}
             <div className="input-box">
               <input
                 type="text"
                 className="input-field"
-                id="name"
-                name="name"
-                placeholder="Username"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
               />
-              <i className="bx bx-user"> </i>{" "}
-            </div>{" "}
-            <div className="input-box">
-              <input
-                type="text"
-                className="input-field"
-                id="userEmail"
-                name="userEmail"
-                placeholder="Useremail"
-              />
-              <i className="bx bx-envelope"> </i>{" "}
             </div>{" "}
             <div className="input-box">
               <input
                 type="password"
                 className="input-field"
-                id="password"
                 name="password"
-                placeholder="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Password"
               />
-              <i className="bx bx-lock-alt"> </i>{" "}
             </div>{" "}
             <div className="input-box">
               <input type="submit" className="submit" value="Sign In" />
             </div>{" "}
-            <div className="two-col">
-              <div className="one">
-                <input type="checkbox" id="login-check" />
-                <label htmlFor="login-check"> Remember me </label>{" "}
-              </div>{" "}
-              <div className="two">
-                <label>
-                  {" "}
-                  <button className="link-btn"> Forgot password ? </button>
-                </label>
-              </div>{" "}
-            </div>{" "}
           </form>{" "}
-        </div>
+        </div>{" "}
         <div
           className="register-container"
           style={{
@@ -113,65 +120,58 @@ const Login = () => {
               <button className="link-btn" onClick={toggleForm}>
                 {" "}
                 Login{" "}
-              </button>
-            </span>
+              </button>{" "}
+            </span>{" "}
             <header> Sign Up </header>{" "}
           </div>{" "}
-          <form>
+          <form onSubmit={handleSubmit}>
+            {error && <div className="error-message">{error}</div>}
             <div className="input-box">
               <input
                 type="text"
                 className="input-field"
-                id="firstName"
                 name="firstName"
-                placeholder="Firstname"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First Name"
                 required
               />
-              <i className="bx bx-phone-call"> </i>{" "}
             </div>{" "}
             <div className="input-box">
               <input
                 type="text"
                 className="input-field"
-                placeholder="Lastname"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name"
                 required
               />
-              <i className="bx bx-envelope"> </i>{" "}
-            </div>
+            </div>{" "}
             <div className="input-box">
               <input
                 type="text"
                 className="input-field"
-                id="email"
                 name="email"
-                placeholder="Emial"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
                 required
               />
-              <i className="bx bx-phone-call"> </i>{" "}
             </div>{" "}
             <div className="input-box">
               <input
-                type="text"
+                type="password"
                 className="input-field"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Password"
                 required
               />
-              <i className="bx bx-envelope"> </i>{" "}
             </div>{" "}
             <div className="input-box">
               <input type="submit" className="submit" value="Register" />
-            </div>{" "}
-            <div className="two-col">
-              <div className="one">
-                <input type="checkbox" id="register-check" />
-                <label htmlFor="register-check"> Remember Me </label>{" "}
-              </div>{" "}
-              <div className="two">
-                <label>
-                  {" "}
-                  <button className="link-btn"> Terms & conditions </button>
-                </label>
-              </div>{" "}
             </div>{" "}
           </form>{" "}
         </div>{" "}
